@@ -1,0 +1,203 @@
+number_pokemon = 0
+fire_pokemon = 0
+grass_pokemon = 0
+water_pokemon = 0
+snivy_hp = 30
+psy_hp = 30
+number_pokemonc = 0
+raichu_hp = 30
+game_ended_by_run = 0
+import sys
+
+while True:
+    choice = input("What's your starter Pokémon—fire, grass or water? ").lower()
+    if choice in ["fire", "grass", "water"]:
+        break
+    else:
+        print("That is not an option. Please try again.\n")
+
+number_pokemon += 1
+
+if choice == "fire":
+    fire_pokemon += 1
+    pokemon_type = "fire"
+    while True:
+        starter = input("Choose one: Charmander, Scorbunny, or Chimchar: ").lower()
+
+        if starter in ["charmander", "scorbunny", "chimchar"]:
+            pokemon = starter.capitalize()
+            break
+        else:
+            print("That is not an option. Please try again.\n")
+elif choice == "grass":
+    grass_pokemon += 1
+    pokemon_type = "grass"
+    while True:
+        starter = input("Choose one: Bulbasaur, chespin, or Treecko: ").lower()
+        if starter in ["bulbasaur", "chespin", "treecko"]:
+            pokemon = starter.capitalize()
+            break
+        else:
+            print("That is not an option. Please try again.\n")
+elif choice == "water":
+    water_pokemon += 1
+    pokemon_type = "water"
+    while True:
+        starter = input("Choose one: Squirtle, Totodile, or Piplup: ").lower()
+        if starter in ["squirtle", "totodile", "piplup"]:
+            pokemon = starter.capitalize()
+            break
+        else:
+            print("That is not an option. Please try again.\n")
+
+print("You chose:", pokemon)
+while True:
+    Nick_Name = input("would you like to give your pokemon a nick name Yes or No").lower()
+    if Nick_Name in ["yes", "no"]:
+        break
+    else:
+        print("That is not an option. Please try again.\n")
+if Nick_Name == "yes":
+    nickname = input(f"What would you like {pokemon} name to be")
+elif Nick_Name == "no":
+    nickname = pokemon
+print(f"Your pokemon name is {nickname}")
+print("Now that we have a name for your pokemon what should we call you?")
+while True:
+    user_name = input("What should we call you?")
+    if user_name == "":
+        print("That is not an option. Please try again.\n")
+    elif user_name.isalpha():
+        break
+    else:
+        print("That is not an option. Please try again.\n")
+print(f"Hello {user_name},welcome to your first adventure")
+if starter in ["charmander", "scorbunny", "chimchar"]:
+    poke_type = "fire"
+elif starter in ["bulbasaur", "chespin", "treecko"]:
+    poke_type = "grass"
+elif starter in ["squirtle", "totodile", "piplup"]:
+    poke_type = "water"
+pokemon_hp = 30
+pokemon_attack = 10
+pokemon_attack2 = 5
+pokemon_fattack = 15
+print(f"Your pokemon is a {poke_type} type, has {pokemon_hp} HP, and thier attack does {pokemon_attack} damage")
+print("On your journey through the woods you enounter a wild pokemon")
+print("The wild pokemon is a Snivy")
+number_pokemon += 1
+while snivy_hp > 0:
+    while True:
+        user_choice2 = input("Would you like to fight or run? (running will end the game) ").lower()
+        if user_choice2 in ["fight", "run"]:
+            break
+        else:
+            print("That is not an option. Please try again.\n")
+    if user_choice2 == "run":
+        print("You ran away! Game over.")
+        number_pokemon -= 1
+        game_ended_by_run = 1
+        sys.exit()
+    else:
+        while True:
+            fight_choice3 = input("Would you like to use attack or attack2? ").lower()
+            if fight_choice3 in ["attack", "attack2"]:
+                break
+            else:
+                print("That is not an option. Please try again.\n")
+        if fight_choice3 == "attack" and pokemon_type == "fire":
+            snivy_hp -= pokemon_fattack
+        elif fight_choice3 == "attack" and pokemon_type in ["water", "grass"]:
+            snivy_hp -= pokemon_attack
+        elif fight_choice3 == "attack2" and pokemon_type in ["water", "grass", "fire"]:
+            snivy_hp -= pokemon_attack2
+        print(f"Snivy now has {snivy_hp} HP\n")
+        if snivy_hp <= 0:
+            print("Snivy has been defeated! Congratulations!")
+            break
+if game_ended_by_run == 1:
+    sys.exit()
+if snivy_hp <= 0:
+    print("After your fight with Snivy you decided to look through the forest")
+    print("You encounter another another wild pokemon")
+    print("The wild pokemon is a Psyduck")
+    number_pokemon += 1
+    while True:
+        poke_choice = input("Would you like to fight, run or catch the Psyduck? (running will end the game) ").lower()
+        if poke_choice in ["fight", "run", "catch"]:
+            break
+        else:
+            print("That is not an option. Please try again.\n")
+
+    if poke_choice == "run":
+        print("You ran away! Game over.")
+        number_pokemon -= 1
+        game_ended_by_run = 1
+        sys.exit()
+    elif poke_choice == "fight":
+        while psy_hp > 0:
+            while True:
+                fight_choice = input("Would you like to use attack or attack2? ").lower()
+                if fight_choice in ["attack", "attack2"]:
+                    break
+                else:
+                    print("That is not an option. Please try again.\n")
+            if fight_choice == "attack" and pokemon_type == "grass":
+                psy_hp -= pokemon_fattack
+            elif fight_choice == "attack" and pokemon_type in ["fire", "water"]:
+                psy_hp -= pokemon_attack
+            elif fight_choice == "attack2" and pokemon_type in ["fire", "water", "grass"]:
+                psy_hp -= pokemon_attack2
+            print(f"Psyduck now has {psy_hp} HP\n")
+            if psy_hp <= 0:
+                print("Psyduck has been defeated! Congratulations!")
+                break
+    elif poke_choice == "catch":
+        print("You caught the Psyduck! Congratulations!")
+        number_pokemonc += 1
+if game_ended_by_run == 1:
+    sys.exit()
+if psy_hp <= 0 or poke_choice == "catch":
+    print("After your encounter with psyduck you decide to go home")
+    print("You encounter another wild pokemon")
+    print("The wild pokemon is a Raichu")
+    number_pokemon += 1
+    while True:
+        poke_choice2 = input("Would you like to fight, run or catch the Raichu? (running will end the game) ").lower()
+        if poke_choice2 in ["fight", "run", "catch"]:
+            break
+        else:
+            print("That is not an option. Please try again.\n")
+    if poke_choice2 == "run":
+        print("You ran away! Game over.")
+        number_pokemon -= 1
+        game_ended_by_run = 1
+        sys.exit()
+    elif poke_choice2 == "fight":
+        while raichu_hp > 0:
+            while True:
+                fight_choice3 = input("Would you like to use attack or attack2? ").lower()
+                if fight_choice3 in ["attack", "attack2"]:
+                    break
+                else:
+                    print("That is not an option. Please try again.\n")
+            if fight_choice3 == "attack" and pokemon_type == "water":
+                raichu_hp -= pokemon_fattack
+            elif fight_choice3 == "attack" and pokemon_type in ["fire", "grass"]:
+                raichu_hp -= pokemon_attack
+            elif fight_choice3 == "attack2" and pokemon_type in ["fire", "grass", "water"]:
+                raichu_hp -= pokemon_attack2
+            print(f"Raichu now has {raichu_hp} HP\n")
+            if raichu_hp <= 0:
+                print("Raichu has been defeated! Congratulations!")
+                break
+    elif poke_choice2 == "catch":
+        print("You caught the Raichu! Congratulations!")
+        number_pokemonc += 1
+print("Congratulations you have completed the pokemon text adventure")
+print("\n--- Game Summary ---")
+print("Total Pokémon encountered:", number_pokemon)
+print("Total Pokémon caught:", number_pokemonc)
+print("Fire starters chosen:", fire_pokemon)
+print("Grass starters chosen:", grass_pokemon)
+print("Water starters chosen:", water_pokemon)
